@@ -33,6 +33,7 @@ for c_name in all_tag_names_no_ts:
 print("##############################################")
 print("#########      START EXPORTING     ##########")
 print("##############################################")
+
 # Get all data and concatenate it
 for data_csv_path, data_csv_path_index in zip(all_data_csv_path, range(len(all_data_csv_path))):
     # File Initialization
