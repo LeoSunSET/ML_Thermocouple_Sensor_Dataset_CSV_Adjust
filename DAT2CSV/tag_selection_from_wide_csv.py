@@ -22,13 +22,19 @@ for files in onlyfiles:
     all_data_csv_path.append(root_data_csv_path + files)
 
 # Change all tag_names
-for c_name in all_tag_names_no_ts:
+def clean_tag_name (tag_names):
+    tag_names_clean = []
+    for c_name in tag_names:
     tag_name_tmp = c_name.replace(" ", "_")
     tag_name_tmp = tag_name_tmp.replace("(", "_")
     tag_name_tmp = tag_name_tmp.replace(")", "")
     tag_name_tmp = tag_name_tmp.replace("/", "_")
     tag_name_tmp = tag_name_tmp.replace("\\", "_")
-    all_tag_names_no_ts_clean.append(tag_name_tmp)
+    tag_names_clean.append(tag_name_tmp)
+
+    return tag_names_clean
+
+all_tag_names_no_ts_clean = clean_tag_name(all_tag_names_no_ts)
 
 print("##############################################")
 print("#########      START EXPORTING     ##########")
@@ -70,13 +76,7 @@ for data_csv_path, data_csv_path_index in zip(all_data_csv_path, range(len(all_d
         ts[ts_row_index, 0] = ts_tmp
 
     # Change current file tag_names
-    for c_name in tag_names_no_ts:
-        tag_name_tmp = c_name.replace(" ", "_")
-        tag_name_tmp = tag_name_tmp.replace("(", "_")
-        tag_name_tmp = tag_name_tmp.replace(")", "")
-        tag_name_tmp = tag_name_tmp.replace("/", "_")
-        tag_name_tmp = tag_name_tmp.replace("\\", "_")
-        tag_names_no_ts_clean.append(tag_name_tmp)
+    tag_names_no_ts_clean = clean_tag_name(tag_names_no_ts)
 
     # Create empty matrix
     all_data_per_file = np.empty([ts_r, len(all_tag_names_no_ts)])
